@@ -88,8 +88,11 @@ ArrayMaxHeap<ItemType>::~ArrayMaxHeap()
 template<class ItemType>
 bool ArrayMaxHeap<ItemType>::isEmpty() const
 {
-    // implement this function
-    return false;
+   if (itemCount == 0) {
+      return true;
+   }
+    
+   return false;
 }  // end isEmpty
 
 template<class ItemType>
@@ -102,7 +105,7 @@ template<class ItemType>
 int ArrayMaxHeap<ItemType>::getNumberOfNodes() const
 {
   // implement this function
-    return -1;
+   return -1;
 }  // end getNumberOfNodes
 
 template<class ItemType>
@@ -124,8 +127,10 @@ ItemType ArrayMaxHeap<ItemType>::peekTop() const //throw(PrecondViolatedExcep)
 template<class ItemType>
 bool ArrayMaxHeap<ItemType>::add(const ItemType& newData)
 {
-    // implement this function
-    return false;
+   itemCount += 1;
+   
+   // implement this function
+   return false;
 
 }  // end add
 
@@ -146,9 +151,16 @@ bool ArrayMaxHeap<ItemType>::remove()
 
 
 int main() {
-   std::cout << "Hello world!";
+   std::cout << "Hello world!\n";
 
-   
+   ArrayMaxHeap<int> myHeap;
+
+   myHeap.add(4);
+   myHeap.add(2);
+
+   //myHeap.clear();
+
+   std::cout << myHeap.isEmpty();
 
    return 0;
 }
