@@ -112,12 +112,12 @@ void ArrayMaxHeap<ItemType>::clear()
 }  // end clear
 
 template<class ItemType>
-ItemType ArrayMaxHeap<ItemType>::peekTop()// const throw(PrecondViolatedExcep)
+ItemType ArrayMaxHeap<ItemType>::peekTop() const //throw(PrecondViolatedExcep)
 {
-    if (isEmpty()) {
-        std::cout << "The Heap is empty\nThe returned value is garbage";
-        return items[0];// the returned value is garbage
-    }
+   if (isEmpty()) {
+      std::cout << "The Heap is empty\nThe returned value is garbage";
+      return items[0]; //the returned value is garbage
+   }
    return items[0];
 } // end peekTop
 
@@ -145,3 +145,10 @@ bool ArrayMaxHeap<ItemType>::remove()
 }  // end remove
 
 
+int main() {
+   std::cout << "Hello world!";
+
+   
+
+   return 0;
+}

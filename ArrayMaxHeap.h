@@ -9,7 +9,7 @@
 #define ARRAY_MAX_HEAP_
 
 #include "HeapInterface.h"
-#include "PrecondViolatedExcep.cpp"
+//#include "PrecondViolatedExcep.cpp"
 
 template<class ItemType>
 class ArrayMaxHeap : public HeapInterface<ItemType>
@@ -59,5 +59,5 @@ public:
    bool remove();
    void clear();
 }; // end ArrayMaxHeap
-//#include "ArrayMaxHeap.cpp"
+//#include "MJDLArrayMaxHeap.cpp"
 #endif
