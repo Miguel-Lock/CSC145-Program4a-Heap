@@ -17,15 +17,13 @@ int ArrayMaxHeap<ItemType>::getLeftChildIndex(const int nodeIndex) const
 template<class ItemType>
 int ArrayMaxHeap<ItemType>::getRightChildIndex(const int nodeIndex) const
 {
-    // implement this function
-    return -1;
+   return (2 * nodeIndex) + 2;
 }  // end getRightChildIndex
 
 template<class ItemType>
 int ArrayMaxHeap<ItemType>::getParentIndex(const int nodeIndex) const
 {
-    // implement this function 
-    return -1;
+   return (nodeIndex - 1) / 2;
 }  // end getParentIndex
 
 template<class ItemType>
@@ -127,11 +125,27 @@ ItemType ArrayMaxHeap<ItemType>::peekTop() const //throw(PrecondViolatedExcep)
 template<class ItemType>
 bool ArrayMaxHeap<ItemType>::add(const ItemType& newData)
 {
-   itemCount += 1;
-   
-   // implement this function
-   return false;
+   //Place new data at the bottom of the tree
+   items[itemCount] = newData;
 
+   //Make new item bubble up the the appropriate spot in the tree
+   int newDataIndex = itemCount;
+   bool inPlace = false;
+   while ((newDataIndex >= 0) && !inPlace) {
+      int parentIndex = (newDataIndex - 1) / 2;
+      if (items[newDataIndex] <= items[parentIndex]) {
+         inPlace = true;
+      }
+      else {  //swap items[newDataIndex] and items[parentIndex]
+         ItemType temp = items[newDataIndex];
+         items[newDataIndex] = items[parentIndex];
+         items[parentIndex] = temp;
+         newDataIndex = parentIndex;
+      }
+   }
+   
+   itemCount++;
+   return inPlace;
 }  // end add
 
 template<class ItemType>
@@ -153,10 +167,24 @@ bool ArrayMaxHeap<ItemType>::remove()
 int main() {
    std::cout << "Hello world!\n";
 
+   int myArray [20];
+
+   for(int i=0; i < 20; i++) {
+      myArray[i] = i + 1;
+   }
+   
+   std::cout << "[ ";
+   for(int i=0; i < 19; i++) {
+      std::cout << myArray[i] << ", ";
+   }
+   std::cout << myArray[19] << " ]\n\n";
+
    ArrayMaxHeap<int> myHeap;
 
-   myHeap.add(4);
-   myHeap.add(2);
+   for(int i=0; i < 19; i++) {
+      myHeap.add(myArray[i]);
+   }
+
 
    //myHeap.clear();
 
