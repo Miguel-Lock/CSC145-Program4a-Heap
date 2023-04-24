@@ -33,9 +33,16 @@ bool ArrayMaxHeap<ItemType>::isLeaf(const int nodeIndex) const
 }  // end isLeaf
 
 template<class ItemType>
-void ArrayMaxHeap<ItemType>::heapRebuild(const int subTreeNodeIndex)
+void ArrayMaxHeap<ItemType>::heapRebuild(const int subTreeNodeIndex) //Need to pass in itemCount as well????
 {
-  // implement this function 
+  // implement this function
+
+   /*
+   for (subTreeNodeIndex = itemCount / 2 - 1; i >= 0; i-- ) {
+      heapRebuild(subTreeNodeIndex);
+   }
+   */
+   
 }  // end heapRebuild
 
 
