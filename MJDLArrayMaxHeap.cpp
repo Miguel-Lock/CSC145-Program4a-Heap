@@ -7,6 +7,17 @@
 #include <cmath> // for log2
 #include "ArrayMaxHeap.h"
 #include <iostream>
+#include <stdexcept>
+
+using namespace std;
+
+// Custom exception in case stack is too small
+class PrecondViolatedExcep : public std::runtime_error
+{
+   public:
+   PrecondViolatedExcep(const std::string& message = "") : std::runtime_error(message) {}
+};
+
 
 template<class ItemType>
 int ArrayMaxHeap<ItemType>::getLeftChildIndex(const int nodeIndex) const
@@ -33,16 +44,11 @@ bool ArrayMaxHeap<ItemType>::isLeaf(const int nodeIndex) const
 }  // end isLeaf
 
 template<class ItemType>
-void ArrayMaxHeap<ItemType>::heapRebuild(const int subTreeNodeIndex) //Need to pass in itemCount as well????
+void ArrayMaxHeap<ItemType>::heapRebuild(int subTreeNodeIndex)
 {
-  // implement this function
-
-   /*
-   for (subTreeNodeIndex = itemCount / 2 - 1; i >= 0; i-- ) {
+   for (int subTreeNodeIndex = itemCount / 2 - 1; subTreeNodeIndex >= 0; subTreeNodeIndex-- ) {
       heapRebuild(subTreeNodeIndex);
    }
-   */
-   
 }  // end heapRebuild
 
 
@@ -96,7 +102,7 @@ bool ArrayMaxHeap<ItemType>::isEmpty() const
    if (itemCount == 0) {
       return true;
    }
-    
+   
    return false;
 }  // end isEmpty
 
@@ -111,6 +117,7 @@ int ArrayMaxHeap<ItemType>::getNumberOfNodes() const
 {
   // implement this function
    return -1;
+   //return itemCount; Is this it?
 }  // end getNumberOfNodes
 
 template<class ItemType>
@@ -123,8 +130,7 @@ template<class ItemType>
 ItemType ArrayMaxHeap<ItemType>::peekTop() const //throw(PrecondViolatedExcep)
 {
    if (isEmpty()) {
-      std::cout << "The Heap is empty\nThe returned value is garbage";
-      return items[0]; //the returned value is garbage
+      throw PrecondViolatedExcep("Error: Precondition Violated: Heap is empty!");
    }
    return items[0];
 } // end peekTop
@@ -196,6 +202,12 @@ int main() {
    //myHeap.clear();
 
    std::cout << myHeap.isEmpty();
+
+   try {
+        std::cout << myHeap.peekTop();
+   } catch (PrecondViolatedExcep thisTime) {
+        cout << thisTime.what();  // prints exception if peek fails
+   }
 
    return 0;
 }
