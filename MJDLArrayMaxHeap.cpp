@@ -21,10 +21,10 @@ Version: 1.0
 using namespace std;
 
 // Custom exception in case stack is too small
-class PrecondViolatedExcep : public std::runtime_error
+class PrecondViolatedExcep : public runtime_error
 {
    public:
-   PrecondViolatedExcep(const std::string& message = "") : std::runtime_error(message) {}
+   PrecondViolatedExcep(const string& message = "") : runtime_error(message) {}
 };
 
 
@@ -75,7 +75,7 @@ void ArrayMaxHeap<ItemType>::heapRebuild(const int subTreeNodeIndex)
             heapRebuild(largerChildIndex);
          }
       }
-      // Else root is a leaf, so you are done 
+   // Else root is a leaf, so you are done 
 }
 
 
@@ -156,7 +156,7 @@ template<class ItemType>
 ItemType ArrayMaxHeap<ItemType>::peekTop() const //throw(PrecondViolatedExcep)
 {
    if (isEmpty()) {
-      throw PrecondViolatedExcep("Error: Precondition Violated: Heap is empty!");
+      throw PrecondViolatedExcep("Error: Inaccessable Item: Heap is empty!");
    }
    
    return items[0];
@@ -205,34 +205,41 @@ bool ArrayMaxHeap<ItemType>::remove()
 
 
 int main() {
-   std::cout << "Hello world!\n";
-
-   int myArray [20];
-
-   for(int i=0; i < 20; i++) {
+   // initialize array myArray
+   int arr_size = 20;
+   int myArray [arr_size]; // = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+   for(int i=0; i < arr_size; i++) {
       myArray[i] = i + 1;
    }
-   
-   std::cout << "[ ";
-   for(int i=0; i < 19; i++) {
-      std::cout << myArray[i] << ", ";
+
+   // print out myArray
+   cout << "Array of items:\n";
+   cout << "[ ";
+   for(int i=0; i < arr_size - 1; i++) {
+      cout << myArray[i] << ", ";
    }
-   std::cout << myArray[19] << " ]\n\n";
+   cout << myArray[arr_size - 1] << " ]\n\n";
 
+   // create heap myHeap, dump in contents of myArray
    ArrayMaxHeap<int> myHeap;
-
-   for(int i=0; i <= 19; i++) {
+   for(int i=0; i <= arr_size - 1; i++) {
       myHeap.add(myArray[i]);
    }
 
-
    //myHeap.clear();
 
-
+   // prints all items form myHeap from top to bottom, removes each item after is read
+   cout << "Heap from top to bottom:\n";
+   int heap_size = myHeap.getNumberOfNodes();
    try {
-        std::cout << myHeap.peekTop();
+      cout << "[ ";
+      for(int i=0; i < heap_size - 1; i++) {
+         cout << myHeap.peekTop() << ", ";
+         myHeap.remove();
+      }
+      cout << myHeap.peekTop() << " ]\n";
    } catch (PrecondViolatedExcep thisTime) {
-        cout << thisTime.what();  // prints exception if peek fails
+      cout << "\n" << thisTime.what() << "\n";
    }
 
    return 0;
