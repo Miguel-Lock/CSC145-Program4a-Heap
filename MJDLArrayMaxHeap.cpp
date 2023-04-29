@@ -46,10 +46,53 @@ bool ArrayMaxHeap<ItemType>::isLeaf(const int nodeIndex) const
 template<class ItemType>
 void ArrayMaxHeap<ItemType>::heapRebuild(int subTreeNodeIndex)
 {
-   for (int subTreeNodeIndex = itemCount / 2 - 1; subTreeNodeIndex >= 0; subTreeNodeIndex-- ) {
-      heapRebuild(subTreeNodeIndex);
+   // Recursively trickle the item at index nodeIndex down to its proper position by 
+   // swapping it with its larger child, if the child is larger than the item. 
+   // If the item is at a leaf, nothing needs to be done. 
+   if (!isLeaf(subTreeNodeIndex))
+   {
+      // The root must have a left child; find larger child 
+      int leftChildIndex = getLeftChildIndex(subTreeNodeIndex);
+      int rightChildIndex = getRightChildIndex(subTreeNodeIndex);
+      int largerChildIndex = rightChildIndex; // Assume right child exists and is the larger 
+      // Check whether right child exists; if so, is left child larger? 
+      // If no right child, left one is larger 
+      if ((largerChildIndex >= itemCount) || (items[leftChildIndex] > items[rightChildIndex]))
+         largerChildIndex = leftChildIndex; // Assumption was wrong 
+         if (items[subTreeNodeIndex] < items[largerChildIndex])
+         {
+            swap(items[subTreeNodeIndex], items[largerChildIndex]);
+            // Transform the semiheap rooted at largerChildIndex into a heap
+            heapRebuild(largerChildIndex);
+         }
+      }
+      // Else root is a leaf, so you are done 
+}
+
+
+template<class ItemType>
+void ArrayMaxHeap<ItemType>::heapRebuild(int subTreeNodeIndex)
+{
+   if (subTreeNodeIndex < itemCount)
+   {
+      int leftChildIndex = getLeftChildIndex(subTreeNodeIndex);
+      int rightChildIndex = getRightChildIndex(subTreeNodeIndex);
+      
+      // Determine index of larger child
+      int largerChildIndex = leftChildIndex;
+      if (rightChildIndex < itemCount && items[rightChildIndex] > items[largerChildIndex])
+      {
+         largerChildIndex = rightChildIndex;
+      }
+        
+      // If larger child is greater than current node, swap and continue to rebuild heap
+      if (items[largerChildIndex] > items[subTreeNodeIndex])
+      {
+         swap(items[largerChildIndex], items[subTreeNodeIndex]);
+         heapRebuild(largerChildIndex);
+      }
    }
-}  // end heapRebuild
+}
 
 
 template<class ItemType>
@@ -132,6 +175,7 @@ ItemType ArrayMaxHeap<ItemType>::peekTop() const //throw(PrecondViolatedExcep)
    if (isEmpty()) {
       throw PrecondViolatedExcep("Error: Precondition Violated: Heap is empty!");
    }
+   
    return items[0];
 } // end peekTop
 
