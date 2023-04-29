@@ -134,9 +134,7 @@ int ArrayMaxHeap<ItemType>::getHeight() const
 template<class ItemType>
 int ArrayMaxHeap<ItemType>::getNumberOfNodes() const
 {
-  // implement this function
-   return -1;
-   //return itemCount; Is this it?
+   return itemCount; // Is this it?
 }  // end getNumberOfNodes
 
 template<class ItemType>
