@@ -44,7 +44,7 @@ bool ArrayMaxHeap<ItemType>::isLeaf(const int nodeIndex) const
 }  // end isLeaf
 
 template<class ItemType>
-void ArrayMaxHeap<ItemType>::heapRebuild(int subTreeNodeIndex)
+void ArrayMaxHeap<ItemType>::heapRebuild(const int subTreeNodeIndex)
 {
    // Recursively trickle the item at index nodeIndex down to its proper position by 
    // swapping it with its larger child, if the child is larger than the item. 
@@ -69,30 +69,6 @@ void ArrayMaxHeap<ItemType>::heapRebuild(int subTreeNodeIndex)
       // Else root is a leaf, so you are done 
 }
 
-
-template<class ItemType>
-void ArrayMaxHeap<ItemType>::heapRebuild(int subTreeNodeIndex)
-{
-   if (subTreeNodeIndex < itemCount)
-   {
-      int leftChildIndex = getLeftChildIndex(subTreeNodeIndex);
-      int rightChildIndex = getRightChildIndex(subTreeNodeIndex);
-      
-      // Determine index of larger child
-      int largerChildIndex = leftChildIndex;
-      if (rightChildIndex < itemCount && items[rightChildIndex] > items[largerChildIndex])
-      {
-         largerChildIndex = rightChildIndex;
-      }
-        
-      // If larger child is greater than current node, swap and continue to rebuild heap
-      if (items[largerChildIndex] > items[subTreeNodeIndex])
-      {
-         swap(items[largerChildIndex], items[subTreeNodeIndex]);
-         heapRebuild(largerChildIndex);
-      }
-   }
-}
 
 
 template<class ItemType>
