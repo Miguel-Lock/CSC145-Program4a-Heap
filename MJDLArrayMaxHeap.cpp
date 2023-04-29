@@ -1,6 +1,15 @@
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
 
+/***********************
+Program Name: MJDLArrayMaxHeap
+Programmer: Miguel Lock
+
+Class: CSC 145 A
+Date: 4-28-23
+Version: 1.0
+***********************/
+
 /** Array-based implementation of the ADT heap.
  @file ArrayMaxHeap.cpp */ 
  
@@ -89,7 +98,7 @@ void ArrayMaxHeap<ItemType>::heapCreate()
 template<class ItemType>
 ArrayMaxHeap<ItemType>::ArrayMaxHeap() : itemCount(0), maxItems(DEFAULT_CAPACITY)
 {
-    items = new ItemType[DEFAULT_CAPACITY];
+   items = new ItemType[DEFAULT_CAPACITY];
 }
 
 template<class ItemType>
@@ -134,7 +143,7 @@ int ArrayMaxHeap<ItemType>::getHeight() const
 template<class ItemType>
 int ArrayMaxHeap<ItemType>::getNumberOfNodes() const
 {
-   return itemCount; // Is this it?
+   return itemCount;
 }  // end getNumberOfNodes
 
 template<class ItemType>
@@ -212,14 +221,13 @@ int main() {
 
    ArrayMaxHeap<int> myHeap;
 
-   for(int i=0; i < 19; i++) {
+   for(int i=0; i <= 19; i++) {
       myHeap.add(myArray[i]);
    }
 
 
    //myHeap.clear();
 
-   std::cout << myHeap.isEmpty();
 
    try {
         std::cout << myHeap.peekTop();
