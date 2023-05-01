@@ -20,7 +20,7 @@ Version: 1.0
 
 using namespace std;
 
-// Custom exception in case stack is too small
+// Custom exception if stack is too small
 class PrecondViolatedExcep : public runtime_error
 {
    public:
@@ -153,12 +153,9 @@ void ArrayMaxHeap<ItemType>::clear()
 }  // end clear
 
 template<class ItemType>
-ItemType ArrayMaxHeap<ItemType>::peekTop() const //throw(PrecondViolatedExcep)
+ItemType ArrayMaxHeap<ItemType>::peekTop() const
 {
-   if (isEmpty()) {
-      throw PrecondViolatedExcep("Error: Inaccessable Item: Heap is empty!");
-   }
-   
+   if (isEmpty()) { throw PrecondViolatedExcep("Error: Inaccessable Item: Heap is empty!"); }
    return items[0];
 } // end peekTop
 
@@ -204,16 +201,31 @@ bool ArrayMaxHeap<ItemType>::remove()
 }  // end remove
 
 
+/*
+Initialize array myArray
+Initialize array myArray size 20 with integers 1-20
+Print out myArray
+Create heap myHeap, dump in contents of myArray
+Print all items form myHeap from top to bottom, removes each item after is read
+Include a try catch that catches PrecondViolatedExcep and prints error message to the screen
+
+Initialize array extraCreditArray size 20 with integers 1-20, out of order
+Print out extraCreditArray
+Create heap extraCreditHeap, dump in contents of extraCreditArray
+Prints all items form extraCreditHeap from top to bottom, removes each item after is read
+Incude a try catch that catches PrecondViolatedExcep and prints error message to the screen
+*/
 int main() {
-   // initialize array myArray
    int arr_size = 20;
-   int myArray [arr_size]; // = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+
+   // initialize array myArray size 20 with integers 1-20
+   int myArray [arr_size];
    for(int i=0; i < arr_size; i++) {
       myArray[i] = i + 1;
    }
 
    // print out myArray
-   cout << "Array of items:\n";
+   cout << "myArray:\n";
    cout << "[ ";
    for(int i=0; i < arr_size - 1; i++) {
       cout << myArray[i] << ", ";
@@ -226,10 +238,9 @@ int main() {
       myHeap.add(myArray[i]);
    }
 
-   //myHeap.clear();
-
    // prints all items form myHeap from top to bottom, removes each item after is read
-   cout << "Heap from top to bottom:\n";
+   // try catch catches PrecondViolatedExcep and prints error message to the screen
+   cout << "myHeap from top to bottom:\n";
    int heap_size = myHeap.getNumberOfNodes();
    try {
       cout << "[ ";
@@ -246,11 +257,11 @@ int main() {
    cout << "\n\n\nExtra credit:\n";
 
 
-   // initialize array extraCreditArray
+   // initialize array extraCreditArray size 20 with integers 1-20, out of order
    int extraCreditArray [arr_size] = { 2, 19, 9, 3, 13, 6, 4, 10, 12, 14, 11, 15, 1, 16, 7, 17, 5, 18, 20, 8 };
 
    // print out extraCreditArray
-   cout << "Array of items:\n";
+   cout << "extraCreditArray:\n";
    cout << "[ ";
    for(int i=0; i < arr_size - 1; i++) {
       cout << extraCreditArray[i] << ", ";
@@ -264,7 +275,8 @@ int main() {
    }
 
    // prints all items form extraCreditHeap from top to bottom, removes each item after is read
-   cout << "Heap from top to bottom:\n";
+   // try catch catches PrecondViolatedExcep and prints error message to the screen
+   cout << "extraCreditHeap from top to bottom:\n";
    heap_size = extraCreditHeap.getNumberOfNodes();
    try {
       cout << "[ ";
@@ -276,7 +288,6 @@ int main() {
    } catch (PrecondViolatedExcep thisTime) {
       cout << "\n" << thisTime.what() << "\n";
    }
-
 
    return 0;
 }
