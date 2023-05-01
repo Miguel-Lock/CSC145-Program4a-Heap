@@ -242,5 +242,41 @@ int main() {
       cout << "\n" << thisTime.what() << "\n";
    }
 
+
+   cout << "\n\n\nExtra credit:\n";
+
+
+   // initialize array extraCreditArray
+   int extraCreditArray [arr_size] = { 2, 19, 9, 3, 13, 6, 4, 10, 12, 14, 11, 15, 1, 16, 7, 17, 5, 18, 20, 8 };
+
+   // print out extraCreditArray
+   cout << "Array of items:\n";
+   cout << "[ ";
+   for(int i=0; i < arr_size - 1; i++) {
+      cout << extraCreditArray[i] << ", ";
+   }
+   cout << extraCreditArray[arr_size - 1] << " ]\n\n";
+
+   // create heap extraCreditHeap, dump in contents of extraCreditArray
+   ArrayMaxHeap<int> extraCreditHeap;
+   for(int i=0; i <= arr_size - 1; i++) {
+      extraCreditHeap.add(extraCreditArray[i]);
+   }
+
+   // prints all items form extraCreditHeap from top to bottom, removes each item after is read
+   cout << "Heap from top to bottom:\n";
+   heap_size = extraCreditHeap.getNumberOfNodes();
+   try {
+      cout << "[ ";
+      for(int i=0; i < heap_size - 1; i++) {
+         cout << extraCreditHeap.peekTop() << ", ";
+         extraCreditHeap.remove();
+      }
+      cout << extraCreditHeap.peekTop() << " ]\n";
+   } catch (PrecondViolatedExcep thisTime) {
+      cout << "\n" << thisTime.what() << "\n";
+   }
+
+
    return 0;
 }
