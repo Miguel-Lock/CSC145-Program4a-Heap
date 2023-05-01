@@ -6,7 +6,7 @@ Program Name: MJDLArrayMaxHeap
 Programmer: Miguel Lock
 
 Class: CSC 145 A
-Date: 4-28-23
+Date: 5-01-23
 Version: 1.0
 ***********************/
 
@@ -291,3 +291,11 @@ int main() {
 
    return 0;
 }
+
+
+
+/*
+NOTE TO TEACHER:
+Hello Dr. Kovach,
+
+*/
