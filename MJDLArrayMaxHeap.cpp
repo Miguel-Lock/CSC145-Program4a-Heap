@@ -52,6 +52,10 @@ bool ArrayMaxHeap<ItemType>::isLeaf(const int nodeIndex) const
    return (getLeftChildIndex(nodeIndex) >= itemCount);
 }  // end isLeaf
 
+
+/*
+Pseudocode
+*/
 template<class ItemType>
 void ArrayMaxHeap<ItemType>::heapRebuild(const int subTreeNodeIndex)
 {
@@ -127,10 +131,7 @@ ArrayMaxHeap<ItemType>::~ArrayMaxHeap()
 template<class ItemType>
 bool ArrayMaxHeap<ItemType>::isEmpty() const
 {
-   if (itemCount == 0) {
-      return true;
-   }
-   
+   if (itemCount == 0) { return true; }
    return false;
 }  // end isEmpty
 
@@ -159,6 +160,9 @@ ItemType ArrayMaxHeap<ItemType>::peekTop() const
    return items[0];
 } // end peekTop
 
+/*
+Pseudocode
+*/
 template<class ItemType>
 bool ArrayMaxHeap<ItemType>::add(const ItemType& newData)
 {
@@ -201,22 +205,8 @@ bool ArrayMaxHeap<ItemType>::remove()
 }  // end remove
 
 
-/*
-Initialize array myArray
-Initialize array myArray size 20 with integers 1-20
-Print out myArray
-Create heap myHeap, dump in contents of myArray
-Print all items form myHeap from top to bottom, removes each item after is read
-Include a try catch that catches PrecondViolatedExcep and prints error message to the screen
-
-Initialize array extraCreditArray size 20 with integers 1-20, out of order
-Print out extraCreditArray
-Create heap extraCreditHeap, dump in contents of extraCreditArray
-Prints all items form extraCreditHeap from top to bottom, removes each item after is read
-Incude a try catch that catches PrecondViolatedExcep and prints error message to the screen
-*/
 int main() {
-   int arr_size = 20;
+   const int arr_size = 20;
 
    // initialize array myArray size 20 with integers 1-20
    int myArray [arr_size];
@@ -291,11 +281,3 @@ int main() {
 
    return 0;
 }
-
-
-
-/*
-NOTE TO TEACHER:
-Hello Dr. Kovach,
-
-*/
