@@ -53,8 +53,16 @@ bool ArrayMaxHeap<ItemType>::isLeaf(const int nodeIndex) const
 }  // end isLeaf
 
 
-/*
-Pseudocode
+/* pseudocode heapRebuild
+if subTreeNodeIndex is a leaf, you are done!
+if subTreeNodeInex is not a leaf:
+   sets values of leftChildIndex and rightChidIndex
+   assert that largerChildIndex is the rightChildIndex
+   if (largerChildIndex is more than or equal to itemCount) OR if (items[leftChidIndex] is more than items[rightChildIndex]):
+      largerChildIndex is the leftChildIndex (inital assertion was wrong)
+      if items[subTreeNodeIndex] is less than items[largerChildIndex]:
+         swap the two items
+         pass largerChildIndex into function heapRebuild
 */
 template<class ItemType>
 void ArrayMaxHeap<ItemType>::heapRebuild(const int subTreeNodeIndex)
@@ -160,8 +168,20 @@ ItemType ArrayMaxHeap<ItemType>::peekTop() const
    return items[0];
 } // end peekTop
 
-/*
-Pseudocode
+/*pseudocode add
+items[itemCount] is assigned the newData
+
+newDataIndex is assigned the itemCount
+declare boolean inPlace, set to false
+while the newDataIndex is more than or equal to 0 AND if inPlace is false:
+   parentIndex is (newDataIndex - 1) / 2
+   if items[newDataIndex] is less than or equal to items[parentIndex]:
+      set inPlace to true
+   otherwise:
+      swap the data in items[newDataIndex] and items[parentIndex]
+      newDataIndex is assigned to the parentIndex
+increment the value of itemCount
+return inPlace (which, by this point, is true)
 */
 template<class ItemType>
 bool ArrayMaxHeap<ItemType>::add(const ItemType& newData)
