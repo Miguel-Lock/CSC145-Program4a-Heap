@@ -6,7 +6,7 @@ Program Name: MJDLArrayMaxHeap
 Programmer: Miguel Lock
 
 Class: CSC 145 A
-Date: 5-01-23
+Date: 5-03-23
 Version: 1.0
 ***********************/
 
@@ -54,15 +54,16 @@ bool ArrayMaxHeap<ItemType>::isLeaf(const int nodeIndex) const
 
 
 /* pseudocode heapRebuild
-if subTreeNodeIndex is a leaf, you are done!
 if subTreeNodeInex is not a leaf:
    sets values of leftChildIndex and rightChidIndex
    assert that largerChildIndex is the rightChildIndex
+
    if (largerChildIndex is more than or equal to itemCount) OR if (items[leftChidIndex] is more than items[rightChildIndex]):
       largerChildIndex is the leftChildIndex (inital assertion was wrong)
       if items[subTreeNodeIndex] is less than items[largerChildIndex]:
          swap the two items
          pass largerChildIndex into function heapRebuild
+if subTreeNodeIndex is a leaf, you are done!
 */
 template<class ItemType>
 void ArrayMaxHeap<ItemType>::heapRebuild(const int subTreeNodeIndex)
@@ -170,9 +171,9 @@ ItemType ArrayMaxHeap<ItemType>::peekTop() const
 
 /*pseudocode add
 items[itemCount] is assigned the newData
-
 newDataIndex is assigned the itemCount
 declare boolean inPlace, set to false
+
 while the newDataIndex is more than or equal to 0 AND if inPlace is false:
    parentIndex is (newDataIndex - 1) / 2
    if items[newDataIndex] is less than or equal to items[parentIndex]:
